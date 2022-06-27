@@ -26,7 +26,7 @@ module.exports = {
             filename: 'index.html' // 生成文件的名称
         }),
         //配置自动清除dist下文件插件
-        new CleanWebpackPlugin(), // 删除的是ouput path 里配置的那个输出文件的文件夹
+        // new CleanWebpackPlugin(), // 删除的是ouput path 里配置的那个输出文件的文件夹
         // 默认情况下dist
     ],
 
@@ -52,6 +52,17 @@ module.exports = {
                 // css-loader 再把css代码转换成webpack 可以识别的js代码
                 // style-loader 在把css代码插入到 dom中
                 use: ["style-loader", "css-loader", 'less-loader']
+            },
+            //配置图片处理
+            {
+                test: /\.(png|jpg|gif|jpeg)$/i,
+                use: [{
+                    loader: 'url-loader', // 匹配文件, 尝试转base64字符串打包到js中
+                    // 配置limit, 超过8k, 不转, file-loader复制, 随机名, 输出文件
+                    options: {
+                        limit: 8 * 1024,
+                    },
+                }, ],
             }
         ]
     }

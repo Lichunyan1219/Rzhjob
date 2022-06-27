@@ -9,6 +9,12 @@ import "./banner.js"
 import $ from "jquery"
 $("#swiper").css("background", "red")
 //引入css样式
-// import "./styles/index.css"
+import "./styles/index.css"
 //引入less样式
-import "./styles/index.less"
+// import "./styles/index.less"
+//引入图片
+import imgUrl from './assets/1.gif';
+
+let img = document.createElement('img');
+img.src = imgUrl;
+document.body.appendChild(img);
