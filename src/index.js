@@ -8,3 +8,5 @@ import "./banner.js"
 //引入jquery
 import $ from "jquery"
 $("#swiper").css("background", "red")
+//引入css样式
+import "./styles/index.css"
