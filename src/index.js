@@ -3,3 +3,8 @@
 // // tab栏切换的逻辑
 // console.log('实现tabs标签页的逻辑')
 //引入文件
+import "./tabs.js"
+import "./banner.js"
+//引入jquery
+import $ from "jquery"
+$("#swiper").css("background", "red")
