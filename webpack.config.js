@@ -53,16 +53,51 @@ module.exports = {
                 // style-loader 在把css代码插入到 dom中
                 use: ["style-loader", "css-loader", 'less-loader']
             },
-            //配置图片处理
-            {
+            //webpack.4配置图片处理
+            // {
+            //     test: /\.(png|jpg|gif|jpeg)$/i,
+            //     use: [{
+            //         loader: 'url-loader', // 匹配文件, 尝试转base64字符串打包到js中
+            //         // 配置limit, 超过8k, 不转, file-loader复制, 随机名, 输出文件
+            //         options: {
+            //             limit: 8 * 1024,
+            //         },
+            //     },
+            //  ],
+            // }
+            //webpack 5 图片处理
+            { // 图片文件的配置(仅适用于webpack5版本)
                 test: /\.(png|jpg|gif|jpeg)$/i,
-                use: [{
-                    loader: 'url-loader', // 匹配文件, 尝试转base64字符串打包到js中
-                    // 配置limit, 超过8k, 不转, file-loader复制, 随机名, 输出文件
-                    options: {
-                        limit: 8 * 1024,
+                type: 'asset', // 在导出一个 data URI 和发送一个单独的文件之间自动选择
+                // 1. 格式转换的条件改变
+                parser: {
+                    dataUrlCondition: {
+                        maxSize: 8 * 1024,
                     },
-                }, ],
+                },
+                // 2. 限制复制图片的命名hash: 6 ext: 
+                generator: {
+                    filename: 'static/[hash:6][ext]',
+                },
+            },
+            //配置字体图标
+            { // webpack5默认内部不认识这些文件, 所以当做静态资源直接输出即可
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                type: 'asset',
+                generator: {
+                    filename: 'font-[name].[hash:6][ext]'
+                }
+            },
+            //配置高版本js
+            {
+                test: /\.js$/,
+                exclude: /(node_modules)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env'] // 预设:转码规则(用bable开发环境本来预设的)
+                    }
+                }
             }
         ]
     }

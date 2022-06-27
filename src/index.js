@@ -18,3 +18,12 @@ import imgUrl from './assets/1.gif';
 let img = document.createElement('img');
 img.src = imgUrl;
 document.body.appendChild(img);
+
+//引入字体图标
+import "./assets/fonts/iconfont.css"
+
+// 处理高版本js
+class App {
+    static qqqqqq = 123
+}
+console.log(App.qqqqqq)
